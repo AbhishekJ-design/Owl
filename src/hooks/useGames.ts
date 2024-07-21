@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import apiClient from '../services/apiClient';
 import useData from './useData';
+import { Genres } from './useGenres';
 
 export interface Platform {
     id: number,
@@ -18,7 +17,7 @@ export interface Game {
 
 }
 
-const fetchGames = () => useData<Game>('/games')
+const useGames = (selectedGenre: Genres|null) => useData<Game>('/games', {params: {genre: selectedGenre?.id}}, [selectedGenre?.id])
 
 
-export default fetchGames
+export default useGames
